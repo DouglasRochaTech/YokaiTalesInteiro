@@ -8,6 +8,7 @@ public class CaixaDeDialogo : MonoBehaviour
     public Jogador ScriptDoJogador;
     public GerenciadorGeral ScriptGerenciadorGeral;
     GerenciadorDeDialogos GerenciadorDialogos;
+    public GameObject[] ObjetosParaAtivar;
     float Timer;
 
     [Header("Audio")]
@@ -54,6 +55,11 @@ public class CaixaDeDialogo : MonoBehaviour
             Time.timeScale = 1;
 
             foreach (GameObject ElementoHUD in ScriptGerenciadorGeral.HUD) { ElementoHUD.SetActive(true); }
+        }
+
+        foreach (GameObject Elemento in ObjetosParaAtivar)
+        {
+            Elemento.SetActive(true);
         }
     }
 }

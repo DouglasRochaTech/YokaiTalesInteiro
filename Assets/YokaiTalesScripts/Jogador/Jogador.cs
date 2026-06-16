@@ -28,6 +28,7 @@ public class Jogador : MonoBehaviour
     int RotacaoColisor; 
 
     [Header("ItensEssenciais")] //Os itens abaixo não são variáveis, mas referências a componentes e outras coisas do Unity!!!
+    public GerenciadorGeral ScriptGerenciadorGeral;
     public Detector DetectorDeColisoes;
     public Transform PontoDeInstanciacao; //Os componentes "Transform" armazenam os dados de posição, rotação e tamanho dos objetos!!! 
     public Transform DirecaoDebug;
@@ -94,38 +95,46 @@ public class Jogador : MonoBehaviour
 
     public void AttackInput(InputAction.CallbackContext context)
     {
-        if (EspadadaTimer == -1)
+        if (ScriptGerenciadorGeral.PAUSADO) { return; }
+        if (ScriptGerenciadorGeral.PromptInteracao.gameObject.activeSelf) 
+        { 
+            ScriptGerenciadorGeral.InariAtiva.AtivarDialogo();
+        }
+        else
         {
-            if (DetectorDeColisoes.NoChao)
-            {
-                if (!InputCorrer)
+            if (EspadadaTimer == -1)
+            {   
+                if (DetectorDeColisoes.NoChao)
                 {
-                    if (context.performed) 
+                    if (!InputCorrer)
                     {
-                        if (EspadadaSwitch) { FoxAnimator.SetBool("Espadada1", true); FoxAnimator.SetBool("Espadada2", false); RotacaoColisor = 180; }
-                        if (!EspadadaSwitch) { FoxAnimator.SetBool("Espadada2", true); FoxAnimator.SetBool("Espadada1", false); RotacaoColisor = 0; }
-                        EspadadaSwitch = !EspadadaSwitch;
-
-                        ColisorDeDanoInstanciado = Instantiate(ColisorDeDano, transform.position, transform.rotation);
-                        Destroy(ColisorDeDanoInstanciado, 0.16f);
-                        ColisorDeDanoInstanciado.transform.Rotate(0, 0, RotacaoColisor);
-
-                        Rigidbody colisorRb = ColisorDeDanoInstanciado.GetComponent<Rigidbody>();
-                        if (colisorRb == null)
+                        if (context.performed) 
                         {
-                            colisorRb = ColisorDeDanoInstanciado.AddComponent<Rigidbody>();
+                            if (EspadadaSwitch) { FoxAnimator.SetBool("Espadada1", true); FoxAnimator.SetBool("Espadada2", false); RotacaoColisor = 180; }
+                            if (!EspadadaSwitch) { FoxAnimator.SetBool("Espadada2", true); FoxAnimator.SetBool("Espadada1", false); RotacaoColisor = 0; }
+                            EspadadaSwitch = !EspadadaSwitch;
+
+                            ColisorDeDanoInstanciado = Instantiate(ColisorDeDano, transform.position, transform.rotation);
+                            Destroy(ColisorDeDanoInstanciado, 0.16f);
+                            ColisorDeDanoInstanciado.transform.Rotate(0, 0, RotacaoColisor);
+
+                            Rigidbody colisorRb = ColisorDeDanoInstanciado.GetComponent<Rigidbody>();
+                            if (colisorRb == null)
+                            {
+                                colisorRb = ColisorDeDanoInstanciado.AddComponent<Rigidbody>();
+                            }
+                            colisorRb.isKinematic = true;
+                            colisorRb.useGravity = false;
+                            colisorRb.constraints = RigidbodyConstraints.FreezeAll;
+
+                            AudioSourceJogador.PlayOneShot(EspadadaFraca);
+                            AudioSourceJogador.PlayOneShot(FoxAtaquesFracos[Random.Range(0, 2)]);
+
+                            EspadadaTimer = 0;
                         }
-                        colisorRb.isKinematic = true;
-                        colisorRb.useGravity = false;
-                        colisorRb.constraints = RigidbodyConstraints.FreezeAll;
-
-                        AudioSourceJogador.PlayOneShot(EspadadaFraca);
-                        AudioSourceJogador.PlayOneShot(FoxAtaquesFracos[Random.Range(0, 2)]);
-
-                        EspadadaTimer = 0;
                     }
-                }
-            }
+                }   
+            }            
         }
     }
 

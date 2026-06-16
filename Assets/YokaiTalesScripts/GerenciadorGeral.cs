@@ -18,6 +18,10 @@ public class GerenciadorGeral : MonoBehaviour
     public GameObject TextoFimDeJogo;
 
     public GameObject[] HUD;
+    public Text PromptInteracao;
+
+    [Header("Inari")]
+    public InteracaoInari InariAtiva;
 
     [Header("Debug")]
     public bool PAUSADO;
@@ -100,6 +104,12 @@ public class GerenciadorGeral : MonoBehaviour
                 ConfirmarOpcaoPausa();
             }
         }*/
+    }
+
+    public void Prompt(string texto)
+    {
+        PromptInteracao.text = texto;
+        PromptInteracao.gameObject.SetActive(true);
     }
 
     void Start()

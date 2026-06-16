@@ -11,11 +11,23 @@ public class GerenciadorDeDialogos : MonoBehaviour
     public CaixaDeDialogo[] CaixasDeDialogo;
     public GameObject CaixaDialogoFox;
     public GameObject CaixaDialogoCristal;
+    public GameObject CaixaDialogoInari;
     public bool PodeContinuar;
 
     public void JumpInput(InputAction.CallbackContext context)
     {
-        if (CaixaDialogoFox.activeSelf || CaixaDialogoCristal.activeSelf)
+        if (CaixaDialogoFox.activeSelf || CaixaDialogoCristal.activeSelf || CaixaDialogoInari.activeSelf)
+        {
+            if (context.performed)
+            {
+                PodeContinuar = true; Debug.Log("(CaixaDialogoFox.activeSelf || CaixaDialogoCristal.activeSelf)");
+
+                foreach (CaixaDeDialogo Dialogo in CaixasDeDialogo)
+                {
+                    Dialogo.Proximo();
+                }
+            }
+        }
         {
             if (context.performed)
             {

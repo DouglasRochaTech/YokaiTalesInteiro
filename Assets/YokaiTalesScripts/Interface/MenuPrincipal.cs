@@ -43,9 +43,17 @@ public class MenuPrincipal : MonoBehaviour
     bool DPadEsquerda;
     bool DPadDireita;
     bool DPadPressionado;
+    bool CutsceneAtiva;
+
+    [Header("Outras Coisas")]
+    public PlayerInput PlayerInputMenu;
+    public GameObject VideoPlayerCutsceneInicial;
+    public GameObject RawImageCutsceneInicial;
+    public GameObject[] ObjetosParaDesabilitarCutscene;
 
     [Header("Audio")]
     public AudioSource UIAudioSource;
+    public AudioSource MusicAudioSource;
     public AudioClip Confirmar;
     public AudioClip Selecionar;
     public Slider EfeitosSlider;
@@ -60,6 +68,8 @@ public class MenuPrincipal : MonoBehaviour
 
     public void dUpInput(InputAction.CallbackContext context)
     {
+        if (CutsceneAtiva) return;
+
         if (context.performed)
         {
             switch (MenuAtivo)
@@ -84,6 +94,8 @@ public class MenuPrincipal : MonoBehaviour
 
     public void dDownInput(InputAction.CallbackContext context)
     {
+        if (CutsceneAtiva) return;
+
         if (context.performed)
         {
             switch (MenuAtivo)
@@ -108,6 +120,8 @@ public class MenuPrincipal : MonoBehaviour
 
     public void dLeftInput(InputAction.CallbackContext context)
     {
+        if (CutsceneAtiva) return;
+
         if (context.performed)
         {
             if (MenuAtivo == "Audio")
@@ -130,6 +144,8 @@ public class MenuPrincipal : MonoBehaviour
 
     public void dRightInput(InputAction.CallbackContext context)
     {
+        if (CutsceneAtiva) return;
+
         if (context.performed)
         {
             if (MenuAtivo == "Audio")
@@ -152,9 +168,19 @@ public class MenuPrincipal : MonoBehaviour
 
     public void JumpInput(InputAction.CallbackContext context) //SELECIONAR
     {
-        if (context.performed)
+        if (!CutsceneAtiva)
         {
-            ConfirmarOpcao();
+            if (context.performed)
+            {
+                ConfirmarOpcao();
+            }
+        }
+        else
+        {
+            if (context.performed)
+            {
+                SceneManager.LoadScene(1);
+            }
         }
     }
 
@@ -231,7 +257,18 @@ public class MenuPrincipal : MonoBehaviour
                 switch (MenuSelecaoPrincipal)
                 {
                     case 0: //NOVO JOGO
-                        SceneManager.LoadScene(1);
+                        //SceneManager.LoadScene(1);
+                        VideoPlayerCutsceneInicial.SetActive(true);
+                        RawImageCutsceneInicial.SetActive(true);
+                        CutsceneAtiva = true;
+                        UIAudioSource.enabled = false;
+                        MusicAudioSource.enabled = false;
+
+                        foreach (GameObject Elemento in ObjetosParaDesabilitarCutscene)
+                        {
+                            Elemento.SetActive(false);
+                        }
+                        
                         break;
 
                     case 1: //OPÇÕES

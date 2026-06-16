@@ -12,12 +12,16 @@ public class FadeInNOut : MonoBehaviour
     public Color Invisivel;
     float Visibilidade = 1;
 
+    void OnEnable()
+    {
+        Visibilidade = 1;
+    }
+
     void Start()
     {
         ImagemPreta.enabled = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Visibilidade -= Time.deltaTime;

@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Chao
+  - Grama
+  - DanoJogador
+  - PlayerMeelee
+  - DanoInimigo
   layers:
   - Default
   - TransparentFX
@@ -13,8 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - player
+  - ponte
   - 
   - 
   - 
