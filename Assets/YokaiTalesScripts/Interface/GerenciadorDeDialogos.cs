@@ -20,18 +20,7 @@ public class GerenciadorDeDialogos : MonoBehaviour
         {
             if (context.performed)
             {
-                PodeContinuar = true; Debug.Log("(CaixaDialogoFox.activeSelf || CaixaDialogoCristal.activeSelf)");
-
-                foreach (CaixaDeDialogo Dialogo in CaixasDeDialogo)
-                {
-                    Dialogo.Proximo();
-                }
-            }
-        }
-        {
-            if (context.performed)
-            {
-                PodeContinuar = true; Debug.Log("(CaixaDialogoFox.activeSelf || CaixaDialogoCristal.activeSelf)");
+                PodeContinuar = true;
 
                 foreach (CaixaDeDialogo Dialogo in CaixasDeDialogo)
                 {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteracaoInari : MonoBehaviour
 {
     public GerenciadorGeral ScriptGerenciadorGeral;
+    //public GerenciadorDeDialogos ScriptGerenciadorDeDialogos;
     public MeshFilter MeshFilterInari;
     public MeshRenderer MeshRendererInari;
     public Mesh InariSuja;
@@ -19,14 +20,18 @@ public class InteracaoInari : MonoBehaviour
     void Start()
     {
         ScriptGerenciadorGeral = GameObject.Find("Canvas").GetComponent<GerenciadorGeral>();
+        //ScriptGerenciadorDeDialogos = GameObject.Find("GerenciadorDialogos").GetComponent<GerenciadorDeDialogos>();
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            ScriptGerenciadorGeral.Prompt("Pressione 'ATAQUE' para interagir");
-            ScriptGerenciadorGeral.InariAtiva = this;
+            if (EstadoInari == "Suja")
+            {
+                ScriptGerenciadorGeral.Prompt("Pressione 'ATAQUE' para interagir");
+                ScriptGerenciadorGeral.InariAtiva = this;
+            }
         }
     }
 
@@ -43,5 +48,6 @@ public class InteracaoInari : MonoBehaviour
     {
         CaixaDeTexto.SetActive(true);
         TextoEscolhido.SetActive(true);
+        ScriptGerenciadorGeral.PromptInteracao.gameObject.SetActive(false);
     }
 }

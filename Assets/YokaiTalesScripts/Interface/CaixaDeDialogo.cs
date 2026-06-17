@@ -26,6 +26,7 @@ public class CaixaDeDialogo : MonoBehaviour
         ScriptDoJogador.AudioSourceCorridinha.volume = 0;
         Time.timeScale = 0;
 
+        UIAudioSource.Stop();
         UIAudioSource.PlayOneShot(DialogoAudio, VolumeAudio);
     }
 
