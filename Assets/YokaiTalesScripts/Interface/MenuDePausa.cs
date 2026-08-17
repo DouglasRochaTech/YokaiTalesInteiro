@@ -249,7 +249,7 @@ public class MenuDePausa : MonoBehaviour
                         break;
 
                     case 2: //SALVAR E SAIR
-                        Application.Quit();
+                        SceneManager.LoadScene("Menu Principal");
                         break;
                 }
                 break;
