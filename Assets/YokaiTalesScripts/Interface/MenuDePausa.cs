@@ -236,8 +236,9 @@ public class MenuDePausa : MonoBehaviour
                     case 0: //RETORNAR
                         Time.timeScale = 1;
                         ScriptDoJogador.enabled = true;
-                        this.gameObject.SetActive(true);
+                        this.gameObject.SetActive(false);
                         GG.PAUSADO = false;
+                        foreach (GameObject ElementoHUD in GG.HUD) { ElementoHUD.SetActive(true); }
                         break;
 
                     case 1: //OPÇÕES
