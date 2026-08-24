@@ -246,7 +246,7 @@ public class Jogador : MonoBehaviour
 
         if (TimerGemido == -1)
         {
-            AudioSourceJogador.PlayOneShot(FoxDores[Random.Range(0, 2)]);
+            AudioSourceJogador.PlayOneShot(FoxDores[Random.Range(0, 3)]);
             TimerGemido = 0;
         }
 

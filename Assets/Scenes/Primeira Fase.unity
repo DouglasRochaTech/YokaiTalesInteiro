@@ -19585,6 +19585,7 @@ MonoBehaviour:
   FoxDores:
   - {fileID: 8300000, guid: 617a407007d9db84bbe604a91a862c7a, type: 3}
   - {fileID: 8300000, guid: 30b562c760f7f2542bd472b3e15e019a, type: 3}
+  - {fileID: 8300000, guid: 42df64c3c8c60fd40a10ce8c527e651c, type: 3}
   Pulo: {fileID: 8300000, guid: 24c1fe0a917aaee42b6d1f830a61954b, type: 3}
   Passos:
   - {fileID: 8300000, guid: 8c3729c68fa9a3240b927c9df21e512a, type: 3}
