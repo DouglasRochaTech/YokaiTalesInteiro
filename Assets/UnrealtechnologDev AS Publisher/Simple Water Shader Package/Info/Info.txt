@@ -1,0 +1,18 @@
+Welcome to my Simple Water Shader Package!
+
+This package is free to use in any personal or commercial project. Credit isn’t required, but a reference/link back would be greatly appreciated.
+
+Included in this package:
+-Water Shader
+	- Customizable colors
+	- Foam
+	- Waves
+	- Intersection effects
+-Simple Terrain Shader
+	- Height-based coloring
+- Simple Foliage Assets
+	- Tree
+	- Bush
+	- Rock
+
+This is my first package, so if you have suggestions or feedback, I’d love to hear them. Thanks for checking it out!
