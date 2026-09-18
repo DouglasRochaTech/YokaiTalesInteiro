@@ -19,7 +19,7 @@ public class Jogador : MonoBehaviour
     public bool InputCorrer;
     public bool InputPulo;
     public int MaxPulos = 0; // Pulo normal + 1 pulo duplo
-    int PulosUsados;
+    public int PulosUsados;
     float AlturaPulo = 4;         // Altura do pulo
     float Gravidade = -40;        // Força da gravidade
     float VelocidadeVertical;
@@ -77,19 +77,24 @@ public class Jogador : MonoBehaviour
         if (context.performed)
         {
             if (!this.enabled) { return; } //Pra ele ñ pular imediatamente depois do diálogo
-            if (DetectorDeColisoes.NoChao)
-            {
-                PulosUsados = 0;
-            }
-
-            if (PulosUsados < MaxPulos)
+            if (DetectorDeColisoes.NoChao && PulosUsados == 0)
             {
                 PulosUsados++;
                 FoxAnimator.Play("Pular");
                 FoxAnimator.SetBool("Pulando", true);
                 AudioSourceJogador.PlayOneShot(Pulo);
                 VelocidadeVertical = Mathf.Sqrt(AlturaPulo * -3f * Gravidade);
+            } 
+            else if (!DetectorDeColisoes.NoChao && PulosUsados < MaxPulos)
+            {
+                PulosUsados++;
+                FoxAnimator.Play("PuloDuplo");
+                FoxAnimator.SetBool("PuloDuplo", true);
+                AudioSourceJogador.PlayOneShot(Pulo);
+                VelocidadeVertical = Mathf.Sqrt(AlturaPulo * -3f * Gravidade);
             }
+
+            //Debug.Log("PulosUsados: " + PulosUsados);
         }
     }
 
