@@ -20,6 +20,7 @@ public class Detector : MonoBehaviour
         {
             NoChao = true;
             JogadorScript.FoxAnimator.SetBool("Pulando", false);
+            JogadorScript.FoxAnimator.SetBool("PuloDuplo", false);
         }
 
         if (other.gameObject.tag == "Grama")

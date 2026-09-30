@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2a047be80de7662479567f0560a65087
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288878
+  packageName: Shrine Pack (Torii, StoneLantern, PaperLantern)
+  packageVersion: 1.02
+  assetPath: Assets/Shrine Pack/Materials/M_PaperLantern_ON.mat
+  uploadId: 694967
