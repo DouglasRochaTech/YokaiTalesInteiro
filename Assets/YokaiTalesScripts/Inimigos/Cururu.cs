@@ -200,7 +200,8 @@ public class Cururu : MonoBehaviour
 
         if (Vida <= 0)
         {
-            ParticulasDOMAL.Stop();
+            if (ParticulasDOMAL) { ParticulasDOMAL.Stop(); }
+            
             InimigoAnimator.SetBool("Morrer", true);
             Renderizador.material = MaterialNormal;
             EfeitoExplosao.SetActive(true);
