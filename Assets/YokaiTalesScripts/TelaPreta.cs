@@ -60,8 +60,8 @@ public class TelaPreta : MonoBehaviour
             {
                 if (EscolhaA.gameObject.activeSelf)
                 {
-                    PlayerPrefs.SetInt("Dificuldade", escolha); //Se a escolha for 0 (escolha A), a dificuldade é 0 (difícil);
-                                                                //e se a escolha for 1 (escolha B) a dificuldade é 1 (fácil)
+                    PlayerPrefs.SetInt("Dificuldade", escolha); //Se a escolha for 0 (escolha A), a dificuldade ï¿½ 0 (difï¿½cil);
+                                                                //e se a escolha for 1 (escolha B) a dificuldade ï¿½ 1 (fï¿½cil)
                     FadeOut = 0;
                     ImagemPreta.gameObject.SetActive(true);
                     FadeInNOut ScriptPraDeletar = ImagemPreta.GetComponent<FadeInNOut>();
@@ -70,7 +70,7 @@ public class TelaPreta : MonoBehaviour
                 }
                 else
                 {
-                    foreach (TextoAnimado Texto in Textos) 
+                    /*foreach (TextoAnimado Texto in Textos) 
                     {
                         Texto.gameObject.SetActive(true);
                         Texto.MostrarTextoLogo();
@@ -78,7 +78,7 @@ public class TelaPreta : MonoBehaviour
 
                     EscolhaA.gameObject.SetActive(true);
                     EscolhaB.gameObject.SetActive(true);
-                    Selecao.SetActive(true);
+                    Selecao.SetActive(true);*/
                 }
             }
         }
@@ -120,23 +120,23 @@ public class TelaPreta : MonoBehaviour
         {
             Textos[1].gameObject.SetActive(true);
         }
-        if (Timer > 10)
+        if (Timer > 8)
         {
             Textos[2].gameObject.SetActive(true);
         }
-        if (Timer > 15)
+        if (Timer > 12)
         {
             Textos[3].gameObject.SetActive(true);
         }
-        if (Timer > 17)
+        if (Timer > 16)
         {
             Textos[4].gameObject.SetActive(true);
         }
-        if (Timer > 20)
+        if (Timer > 19)
         {
             Textos[5].gameObject.SetActive(true);
         }
-        if (Timer > 21)
+        if (Timer > 20)
         {
             EscolhaA.gameObject.SetActive(true);
             EscolhaB.gameObject.SetActive(true);

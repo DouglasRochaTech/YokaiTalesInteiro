@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 176314398}
   - component: {fileID: 176314397}
   - component: {fileID: 176314396}
+  - component: {fileID: 176314399}
   m_Layer: 5
   m_Name: TextoMisterioso5
   m_TagString: Untagged
@@ -387,7 +388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 301, y: -96}
+  m_AnchoredPosition: {x: 301, y: 114}
   m_SizeDelta: {x: 3155.1787, y: 274.3412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &176314396
@@ -397,7 +398,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176314394}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2103b5fd54e591843a116d51bca21e35, type: 3}
   m_Name: 
@@ -447,6 +448,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176314394}
   m_CullTransparentMesh: 0
+--- !u!114 &176314399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176314394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98cf10c98c2a9f4a801511776302cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextoFadeInOut
+  Invisivel: {r: 0, g: 0, b: 0, a: 0}
+  Visivel: {r: 1, g: 1, b: 1, a: 1}
+  Texto: {fileID: 176314397}
+  Visibilidade: 0
+  TempoVisivel: 2
+  ComFadeOut: 0
+  Timer: 0
 --- !u!1 &223088144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,6 +1867,7 @@ GameObject:
   - component: {fileID: 714943717}
   - component: {fileID: 714943716}
   - component: {fileID: 714943715}
+  - component: {fileID: 714943718}
   m_Layer: 5
   m_Name: TextoMisterioso3
   m_TagString: Untagged
@@ -1870,8 +1891,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 62, y: 119}
-  m_SizeDelta: {x: 3155.1787, y: 274.3412}
+  m_AnchoredPosition: {x: 7.301525, y: 2}
+  m_SizeDelta: {x: 4105.9604, y: 357.0112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &714943715
 MonoBehaviour:
@@ -1880,7 +1901,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714943713}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2103b5fd54e591843a116d51bca21e35, type: 3}
   m_Name: 
@@ -1910,12 +1931,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: b394f7eeaa71b274e88f4b7573df9dfd, type: 3}
-    m_FontSize: 160
+    m_FontSize: 190
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 300
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -1930,6 +1951,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714943713}
   m_CullTransparentMesh: 0
+--- !u!114 &714943718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714943713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98cf10c98c2a9f4a801511776302cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextoFadeInOut
+  Invisivel: {r: 0, g: 0, b: 0, a: 0}
+  Visivel: {r: 1, g: 1, b: 1, a: 1}
+  Texto: {fileID: 714943716}
+  Visibilidade: 0
+  TempoVisivel: 2
+  ComFadeOut: 1
+  Timer: 0
 --- !u!1 &719928200
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,6 +2054,7 @@ GameObject:
   - component: {fileID: 810371639}
   - component: {fileID: 810371638}
   - component: {fileID: 810371637}
+  - component: {fileID: 810371640}
   m_Layer: 5
   m_Name: TextoMisterioso0
   m_TagString: Untagged
@@ -2037,8 +2078,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 61, y: 447}
-  m_SizeDelta: {x: 3155.1787, y: 274.3412}
+  m_AnchoredPosition: {x: 6, y: -1.904}
+  m_SizeDelta: {x: 4105.9604, y: 357.0112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &810371637
 MonoBehaviour:
@@ -2047,7 +2088,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810371635}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2103b5fd54e591843a116d51bca21e35, type: 3}
   m_Name: 
@@ -2077,12 +2118,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: b394f7eeaa71b274e88f4b7573df9dfd, type: 3}
-    m_FontSize: 160
+    m_FontSize: 190
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 300
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -2097,6 +2138,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810371635}
   m_CullTransparentMesh: 0
+--- !u!114 &810371640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810371635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98cf10c98c2a9f4a801511776302cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextoFadeInOut
+  Invisivel: {r: 0, g: 0, b: 0, a: 0}
+  Visivel: {r: 1, g: 1, b: 1, a: 1}
+  Texto: {fileID: 810371638}
+  Visibilidade: 0
+  TempoVisivel: 2
+  ComFadeOut: 1
+  Timer: 0
 --- !u!1 &974094397
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,6 +2326,7 @@ GameObject:
   - component: {fileID: 1094139743}
   - component: {fileID: 1094139742}
   - component: {fileID: 1094139741}
+  - component: {fileID: 1094139744}
   m_Layer: 5
   m_Name: TextoMisterioso2
   m_TagString: Untagged
@@ -2289,8 +2350,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 59, y: 186}
-  m_SizeDelta: {x: 3155.1787, y: 274.3412}
+  m_AnchoredPosition: {x: 3.3974247, y: 12.4107}
+  m_SizeDelta: {x: 4105.9604, y: 357.0112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1094139741
 MonoBehaviour:
@@ -2299,7 +2360,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094139739}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2103b5fd54e591843a116d51bca21e35, type: 3}
   m_Name: 
@@ -2329,12 +2390,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: b394f7eeaa71b274e88f4b7573df9dfd, type: 3}
-    m_FontSize: 160
+    m_FontSize: 190
     m_FontStyle: 3
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -2349,6 +2410,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094139739}
   m_CullTransparentMesh: 0
+--- !u!114 &1094139744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094139739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98cf10c98c2a9f4a801511776302cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextoFadeInOut
+  Invisivel: {r: 0, g: 0, b: 0, a: 0}
+  Visivel: {r: 1, g: 0, b: 0, a: 1}
+  Texto: {fileID: 1094139742}
+  Visibilidade: 0
+  TempoVisivel: 2
+  ComFadeOut: 1
+  Timer: 0
 --- !u!114 &1175438897 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8062322887095424923, guid: 61990b9dbcdc2fb4eb6cbbbc91cec58f,
@@ -2917,6 +2997,7 @@ GameObject:
   - component: {fileID: 1508769267}
   - component: {fileID: 1508769266}
   - component: {fileID: 1508769265}
+  - component: {fileID: 1508769268}
   m_Layer: 5
   m_Name: TextoMisterioso1
   m_TagString: Untagged
@@ -2940,8 +3021,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 61.00002, y: 352}
-  m_SizeDelta: {x: 3155.1787, y: 274.3412}
+  m_AnchoredPosition: {x: 6.0002213, y: -8.410707}
+  m_SizeDelta: {x: 4105.9604, y: 357.0112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1508769265
 MonoBehaviour:
@@ -2950,7 +3031,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508769263}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2103b5fd54e591843a116d51bca21e35, type: 3}
   m_Name: 
@@ -2980,12 +3061,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: b394f7eeaa71b274e88f4b7573df9dfd, type: 3}
-    m_FontSize: 160
+    m_FontSize: 190
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -3001,6 +3082,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508769263}
   m_CullTransparentMesh: 0
+--- !u!114 &1508769268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508769263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98cf10c98c2a9f4a801511776302cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextoFadeInOut
+  Invisivel: {r: 0, g: 0, b: 0, a: 0}
+  Visivel: {r: 1, g: 1, b: 1, a: 1}
+  Texto: {fileID: 1508769266}
+  Visibilidade: 0
+  TempoVisivel: 2
+  ComFadeOut: 1
+  Timer: 0
 --- !u!1 &1578259993 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8062322887497779123, guid: 61990b9dbcdc2fb4eb6cbbbc91cec58f,
@@ -3116,6 +3216,7 @@ GameObject:
   - component: {fileID: 1861151469}
   - component: {fileID: 1861151468}
   - component: {fileID: 1861151467}
+  - component: {fileID: 1861151470}
   m_Layer: 5
   m_Name: TextoMisterioso4
   m_TagString: Untagged
@@ -3139,8 +3240,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 61.00003, y: 44.99995}
-  m_SizeDelta: {x: 3155.1787, y: 274.3412}
+  m_AnchoredPosition: {x: 6.000225, y: -0.6027}
+  m_SizeDelta: {x: 4105.9604, y: 357.0112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1861151467
 MonoBehaviour:
@@ -3149,7 +3250,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861151465}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2103b5fd54e591843a116d51bca21e35, type: 3}
   m_Name: 
@@ -3179,12 +3280,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: b394f7eeaa71b274e88f4b7573df9dfd, type: 3}
-    m_FontSize: 160
+    m_FontSize: 190
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 300
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -3199,6 +3300,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861151465}
   m_CullTransparentMesh: 0
+--- !u!114 &1861151470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861151465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98cf10c98c2a9f4a801511776302cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextoFadeInOut
+  Invisivel: {r: 0, g: 0, b: 0, a: 0}
+  Visivel: {r: 1, g: 1, b: 1, a: 1}
+  Texto: {fileID: 1861151468}
+  Visibilidade: 0
+  TempoVisivel: 2
+  ComFadeOut: 1
+  Timer: 0
 --- !u!1 &1922390330
 GameObject:
   m_ObjectHideFlags: 0
@@ -3210,6 +3330,7 @@ GameObject:
   - component: {fileID: 1922390331}
   - component: {fileID: 1922390334}
   - component: {fileID: 1922390333}
+  - component: {fileID: 1922390335}
   m_Layer: 5
   m_Name: Escolha A
   m_TagString: Untagged
@@ -3233,7 +3354,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -21.000008, y: -287}
+  m_AnchoredPosition: {x: -21.000008, y: -77.000015}
   m_SizeDelta: {x: 1318.8643, y: 274.3412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1922390333
@@ -3278,6 +3399,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922390330}
   m_CullTransparentMesh: 0
+--- !u!114 &1922390335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922390330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98cf10c98c2a9f4a801511776302cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextoFadeInOut
+  Invisivel: {r: 0, g: 0, b: 0, a: 0}
+  Visivel: {r: 1, g: 1, b: 1, a: 1}
+  Texto: {fileID: 1922390333}
+  Visibilidade: 0
+  TempoVisivel: 2
+  ComFadeOut: 0
+  Timer: 0
 --- !u!1 &2001213739
 GameObject:
   m_ObjectHideFlags: 0
@@ -3289,6 +3429,7 @@ GameObject:
   - component: {fileID: 2001213740}
   - component: {fileID: 2001213743}
   - component: {fileID: 2001213742}
+  - component: {fileID: 2001213744}
   m_Layer: 5
   m_Name: Escolha B
   m_TagString: Untagged
@@ -3312,7 +3453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -21.000008, y: -389}
+  m_AnchoredPosition: {x: -21.000008, y: -179.00002}
   m_SizeDelta: {x: 1318.8643, y: 274.3412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2001213742
@@ -3357,6 +3498,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001213739}
   m_CullTransparentMesh: 0
+--- !u!114 &2001213744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001213739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98cf10c98c2a9f4a801511776302cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextoFadeInOut
+  Invisivel: {r: 0, g: 0, b: 0, a: 0}
+  Visivel: {r: 1, g: 1, b: 1, a: 1}
+  Texto: {fileID: 2001213742}
+  Visibilidade: 0
+  TempoVisivel: 2
+  ComFadeOut: 0
+  Timer: 0
 --- !u!1 &2124806609
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,7 +3551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19, y: -283}
+  m_AnchoredPosition: {x: -19, y: -80}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &8062322888136249770

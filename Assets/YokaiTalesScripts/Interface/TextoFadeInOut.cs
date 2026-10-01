@@ -3,13 +3,22 @@ using UnityEngine.UI;
 
 public class TextoFadeInOut : MonoBehaviour
 {
-    public Text Texto;
+    [Header("Coisas")]
     public Color Invisivel;
     public Color Visivel;
+    public Text Texto;
 
+    [Header("Configurações")]
     public float Visibilidade;
     public float TempoVisivel = 2;
+    public bool ComFadeOut = true;
     public float Timer;
+
+    void OnEnable()
+    {
+        Texto = GetComponent<Text>();
+        Texto.color = Invisivel;
+    }
 
     void Update()
     {
@@ -27,10 +36,17 @@ public class TextoFadeInOut : MonoBehaviour
         }
         else
         {
-            Visibilidade -= Time.unscaledDeltaTime;
-            Texto.color = Color.Lerp(Invisivel, Visivel, Visibilidade);
+            if (ComFadeOut) 
+            { 
+                Visibilidade -= Time.unscaledDeltaTime;
+                Texto.color = Color.Lerp(Invisivel, Visivel, Visibilidade);
 
-            if (Visibilidade <= 0) { this.enabled = false; }
+                if (Visibilidade <= 0) { this.enabled = false; }
+            }
+            else
+            {
+                this.enabled = false;
+            }
         }
     }
 }
