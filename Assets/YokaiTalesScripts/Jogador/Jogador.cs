@@ -8,9 +8,11 @@ public class Jogador : MonoBehaviour
     //Este é o script que controla o Fox e suas animações, quem diria!!!!!!!
 
     //O script está: no objeto "Jogador"
-
+    [Header("Stats")]
     public float Vida = 100; //"float" é a variável de número REAL. Quando a variável é "pública" ela é visível no editor!
     public float Velocidade = 5;
+    public float DanoEspadadaFraca = 40;
+    public float DanoEspadadaForte = 80;
 
     [Header("Debug")]
     public float InputHor;
@@ -25,7 +27,9 @@ public class Jogador : MonoBehaviour
     float VelocidadeVertical;
     float EspadadaTimer = -1;
     bool EspadadaSwitch;
-    int RotacaoColisor; 
+    int RotacaoColisor;
+    string TipoEspadada;
+    bool ColisorInstanciado;
 
     [Header("ItensEssenciais")] //Os itens abaixo não são variáveis, mas referências a componentes e outras coisas do Unity!!!
     public GerenciadorGeral ScriptGerenciadorGeral;
@@ -118,19 +122,10 @@ public class Jogador : MonoBehaviour
                             if (EspadadaSwitch) { FoxAnimator.SetBool("Espadada1", true); FoxAnimator.SetBool("Espadada2", false); RotacaoColisor = 180; }
                             if (!EspadadaSwitch) { FoxAnimator.SetBool("Espadada2", true); FoxAnimator.SetBool("Espadada1", false); RotacaoColisor = 0; }
                             EspadadaSwitch = !EspadadaSwitch;
+                            TipoEspadada = "Fraca";
 
-                            ColisorDeDanoInstanciado = Instantiate(ColisorDeDano, transform.position, transform.rotation);
-                            Destroy(ColisorDeDanoInstanciado, 0.16f);
-                            ColisorDeDanoInstanciado.transform.Rotate(0, 0, RotacaoColisor);
-
-                            Rigidbody colisorRb = ColisorDeDanoInstanciado.GetComponent<Rigidbody>();
-                            if (colisorRb == null)
-                            {
-                                colisorRb = ColisorDeDanoInstanciado.AddComponent<Rigidbody>();
-                            }
-                            colisorRb.isKinematic = true;
-                            colisorRb.useGravity = false;
-                            colisorRb.constraints = RigidbodyConstraints.FreezeAll;
+                            InstanciarColisorDeDano(DanoEspadadaFraca);
+                            ColisorInstanciado = true;
 
                             AudioSourceJogador.PlayOneShot(EspadadaFraca);
                             AudioSourceJogador.PlayOneShot(FoxAtaquesFracos[Random.Range(0, 2)]);
@@ -141,6 +136,66 @@ public class Jogador : MonoBehaviour
                 }   
             }            
         }
+    }
+
+    public void StrongAttackInput(InputAction.CallbackContext context)
+    {
+        if (ScriptGerenciadorGeral.PAUSADO) { return; }
+        if (ScriptGerenciadorGeral.PromptInteracao.gameObject.activeSelf)
+        {
+            ScriptGerenciadorGeral.InariAtiva.AtivarDialogo();
+        }
+        else
+        {
+            if (EspadadaTimer == -1)
+            {
+                if (DetectorDeColisoes.NoChao)
+                {
+                    if (!InputCorrer)
+                    {
+                        if (context.performed)
+                        {
+                            //if (EspadadaSwitch) { FoxAnimator.SetBool("Espadada1", true); FoxAnimator.SetBool("Espadada2", false); RotacaoColisor = 180; }
+                            //if (!EspadadaSwitch) { FoxAnimator.SetBool("Espadada2", true); FoxAnimator.SetBool("Espadada1", false); RotacaoColisor = 0; }
+                            //EspadadaSwitch = !EspadadaSwitch;
+                            SistemaDeParticulas.Stop();
+                            FoxAnimator.SetBool("EspadadaF1", true);
+                            TipoEspadada = "Forte";
+
+                            /*InstanciarColisorDeDano();*/
+
+                            EspadadaTimer = 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    void InstanciarColisorDeDano(float Dano = 40, float Offset = 0, float Scale = 1)
+    {
+        ColisorDeDanoInstanciado = Instantiate(ColisorDeDano, transform.position, transform.rotation);
+        Destroy(ColisorDeDanoInstanciado, 0.16f);
+        //ColisorDeDanoInstanciado.transform.Translate(transform.forward * Offset);
+
+        Vector3 posicaoDesejada = transform.position + (transform.forward * Offset);
+        ColisorDeDanoInstanciado.transform.position = posicaoDesejada;
+
+        ColisorDeDanoInstanciado.transform.Rotate(0, 0, RotacaoColisor);
+
+        Vector3 escalaDesejada = new Vector3(ColisorDeDanoInstanciado.transform.localScale.x * Scale, ColisorDeDanoInstanciado.transform.localScale.y * Scale, ColisorDeDanoInstanciado.transform.localScale.z * Scale);
+        ColisorDeDanoInstanciado.transform.localScale = escalaDesejada;
+
+        ColisorDeDanoInstanciado.GetComponent<DanoJogador>().Dano = Dano;
+
+        Rigidbody colisorRb = ColisorDeDanoInstanciado.GetComponent<Rigidbody>();
+        if (colisorRb == null)
+        {
+            colisorRb = ColisorDeDanoInstanciado.AddComponent<Rigidbody>();
+        }
+        colisorRb.isKinematic = true;
+        colisorRb.useGravity = false;
+        colisorRb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     void Update()
@@ -201,11 +256,38 @@ public class Jogador : MonoBehaviour
         {
             EspadadaTimer += Time.deltaTime; 
 
-            if (EspadadaTimer >= 0.2f)
+            //O timing é diferente de acordo com o tipo de espadada!!!!!
+            switch (TipoEspadada)
             {
-                EspadadaTimer = -1;
-                FoxAnimator.SetBool("Espadada1", false);
-                FoxAnimator.SetBool("Espadada2", false);
+                case "Fraca":
+                    if (EspadadaTimer >= 0.2f)
+                    {
+                        EspadadaTimer = -1;
+                        FoxAnimator.SetBool("Espadada1", false);
+                        FoxAnimator.SetBool("Espadada2", false);
+                        ColisorInstanciado = false;
+                    }
+                    break;
+
+                case "Forte":
+                    if (EspadadaTimer > 0.55f)
+                    {
+                        if (!ColisorInstanciado) 
+                        {
+                            ColisorInstanciado = true;
+                            RotacaoColisor = 180;
+                            InstanciarColisorDeDano(DanoEspadadaForte, 2, 1.4f);
+                            AudioSourceJogador.PlayOneShot(EspadadaFraca);
+                            AudioSourceJogador.PlayOneShot(FoxAtaquesFracos[Random.Range(0, 2)]);
+                        }                      
+                    }
+                    if (EspadadaTimer >= 0.95f)
+                    {
+                        EspadadaTimer = -1;
+                        FoxAnimator.SetBool("EspadadaF1", false);
+                        ColisorInstanciado = false;
+                    }
+                    break;
             }
         }
 
@@ -247,7 +329,8 @@ public class Jogador : MonoBehaviour
     {
         Vida -= Dano;
         FoxAnimator.Play("Dano");
-        EspadadaTimer = 0;
+        FoxAnimator.SetBool("EspadadaF1", false);
+        EspadadaTimer = -1;
 
         if (TimerGemido == -1)
         {

@@ -27,6 +27,8 @@ public class CullingDeObjetos : MonoBehaviour
 
     void FixedUpdate()
     {
+		if (Player == null) { this.enabled = false; return; }
+
 		Checar++;
 
 		if (Checar == 4)

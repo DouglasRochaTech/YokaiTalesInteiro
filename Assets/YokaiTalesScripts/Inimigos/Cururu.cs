@@ -184,18 +184,20 @@ public class Cururu : MonoBehaviour
     {
         if (other.gameObject.tag == "DanoJogador")
         {
-            ChecarDano(40);
+            ChecarDano(other.gameObject.GetComponent<DanoJogador>());
         }
     }
 
-    void ChecarDano(float Dano)
+    void ChecarDano(DanoJogador ScriptDano)
     {
+        //if (TimerDano > 0.1f) { return; } //Para o colisor ñ ficar spammando ataque durante micro colisões
+
         TimerDano = 0;
         Renderizador.material = MaterialDano;
         Controlador.Move(transform.forward * -0.3f);
         InimigoAnimator.SetBool("Dano", true);
         //GG.HitStopTimer = 0;
-        Vida -= 40;
+        Vida -= ScriptDano.Dano;
         AudioSourceCururu.PlayOneShot(GemidoDor, 0.5f);
 
         if (Vida <= 0)
@@ -209,5 +211,6 @@ public class Cururu : MonoBehaviour
             Destroy(this);
             Destroy(Controlador);
         }
+        Debug.Log("Dano!!!!!");
     }
 }

@@ -17494,6 +17494,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 57ba3739-788c-42cb-8000-0cab939e288f
     m_ActionName: Player/stickClickR
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 664165848}
+        m_TargetAssemblyTypeName: Jogador, Assembly-CSharp
+        m_MethodName: StrongAttackInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fc1ddb49-7aa6-4fd3-b891-c747f4a3dc6f
+    m_ActionName: 'Player/StrongAttack[/XInputControllerWindows/buttonNorth,/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

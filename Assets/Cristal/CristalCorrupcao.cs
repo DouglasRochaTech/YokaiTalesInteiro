@@ -22,7 +22,7 @@ public class CristalCorrupcao : MonoBehaviour
     [Header("Debug")]
     private Vector3 PosicaoInicial;
     private Vector3 PosicaoInicialFlutuante;
-    int Vida = 100;
+    float Vida = 100;
 
     void Start()
     {
@@ -51,7 +51,7 @@ public class CristalCorrupcao : MonoBehaviour
             //transform.Translate(-Vector3.right * 4);
             //transform.Translate(other.transform.forward * 4, Space.Self);
 
-            Vida -= 25;
+            Vida -= other.GetComponent<DanoJogador>().Dano;
 
             if (Vida <= 0)
             {
