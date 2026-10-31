@@ -25,6 +25,11 @@ public class CameraPivot : MonoBehaviour
         InputCamera = context.ReadValue<Vector2>();
     }
 
+    private void Start()
+    {
+        transform.position = JogadorT.position;
+    }
+
     void Update()
     {
         if (JogadorT)

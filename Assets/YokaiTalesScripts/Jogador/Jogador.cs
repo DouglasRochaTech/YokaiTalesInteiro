@@ -12,7 +12,7 @@ public class Jogador : MonoBehaviour
     public float Vida = 100; //"float" é a variável de número REAL. Quando a variável é "pública" ela é visível no editor!
     public float Velocidade = 5;
     public float DanoEspadadaFraca = 40;
-    public float DanoEspadadaForte = 80;
+    public float[] DanoEspadadaForte = {80, 80, 100};
 
     [Header("Debug")]
     public float InputHor;
@@ -22,10 +22,12 @@ public class Jogador : MonoBehaviour
     public bool InputPulo;
     public int MaxPulos = 0; // Pulo normal + 1 pulo duplo
     public int PulosUsados;
+    public int EspadadaForteAtual;
     float AlturaPulo = 4;         // Altura do pulo
     float Gravidade = -40;        // Força da gravidade
     float VelocidadeVertical;
     float EspadadaTimer = -1;
+    bool ComboEspadadaForteSolicitada;
     bool EspadadaSwitch;
     int RotacaoColisor;
     string TipoEspadada;
@@ -81,6 +83,7 @@ public class Jogador : MonoBehaviour
         if (context.performed)
         {
             if (!this.enabled) { return; } //Pra ele ñ pular imediatamente depois do diálogo
+            if (EspadadaTimer != -1) { return; } //Pra ele ñ pular durante a animação de ataque
             if (DetectorDeColisoes.NoChao && PulosUsados == 0)
             {
                 PulosUsados++;
@@ -155,21 +158,129 @@ public class Jogador : MonoBehaviour
                     {
                         if (context.performed)
                         {
-                            //if (EspadadaSwitch) { FoxAnimator.SetBool("Espadada1", true); FoxAnimator.SetBool("Espadada2", false); RotacaoColisor = 180; }
-                            //if (!EspadadaSwitch) { FoxAnimator.SetBool("Espadada2", true); FoxAnimator.SetBool("Espadada1", false); RotacaoColisor = 0; }
-                            //EspadadaSwitch = !EspadadaSwitch;
                             SistemaDeParticulas.Stop();
                             FoxAnimator.SetBool("EspadadaF1", true);
                             TipoEspadada = "Forte";
-
-                            /*InstanciarColisorDeDano();*/
+                            EspadadaForteAtual = 1;
+                            ComboEspadadaForteSolicitada = false;
 
                             EspadadaTimer = 0;
                         }
                     }
                 }
             }
+            else if (context.performed && TipoEspadada == "Forte" && EspadadaForteAtual < 3)
+            {
+                if (ColisorInstanciado)
+                {
+                    AvancarComboEspadadaForte();
+                }
+                else
+                {
+                    ComboEspadadaForteSolicitada = true;
+                }
+            }
         }
+    }
+
+    public void LogicaEspadada()
+    {
+        switch (TipoEspadada)
+        {
+            case "Fraca":
+                if (EspadadaTimer >= 0.2f)
+                {
+                    EspadadaTimer = -1;
+                    FoxAnimator.SetBool("Espadada1", false);
+                    FoxAnimator.SetBool("Espadada2", false);
+                    ColisorInstanciado = false;
+                }
+                break;
+
+            case "Forte":
+                switch (EspadadaForteAtual)
+                {
+                    case 1:
+                        if (EspadadaTimer > 0.55f && !ColisorInstanciado)
+                        {
+                            RotacaoColisor = 180;
+                            InstanciarColisorEspadadaForteAtual(0, 2, 1.4f);
+                        }
+                        if (EspadadaTimer >= 0.95f)
+                        {
+                            FinalizarEspadadaForteAtual();
+                        }
+                        break;
+
+                    case 2:
+                        if (EspadadaTimer > 0.55f && !ColisorInstanciado)
+                        {
+                            RotacaoColisor = 0;
+                            InstanciarColisorEspadadaForteAtual(1, 1, 1.8f);
+                        }
+                        if (EspadadaTimer >= 0.95f)
+                        {
+                            FinalizarEspadadaForteAtual();
+                        }
+                        break;
+
+                    case 3:
+                        if (EspadadaTimer > 0.55f && !ColisorInstanciado)
+                        {
+                            RotacaoColisor = 180;
+                            InstanciarColisorEspadadaForteAtual(2, 0.5f, 2.0f);
+                        }
+                        if (EspadadaTimer >= 0.95f)
+                        {
+                            FinalizarEspadadaForteAtual();
+                        }
+                        break;
+                }
+                break;
+        }
+    }
+
+    void InstanciarColisorEspadadaForteAtual(float Dano = 0, float Offset = 0, float Scale = 1)
+    {
+        ColisorInstanciado = true;
+        InstanciarColisorDeDano(Dano, Offset, Scale);
+        AudioSourceJogador.PlayOneShot(EspadadaFraca);
+        AudioSourceJogador.PlayOneShot(FoxAtaquesFracos[Random.Range(0, 2)]);
+
+        if (ComboEspadadaForteSolicitada && EspadadaForteAtual < 3)
+        {
+            AvancarComboEspadadaForte();
+        }
+    }
+
+    void AvancarComboEspadadaForte()
+    {
+        FoxAnimator.SetBool("EspadadaF" + EspadadaForteAtual, false);
+        EspadadaForteAtual++;
+        FoxAnimator.SetBool("EspadadaF" + EspadadaForteAtual, true);
+
+        if (EspadadaForteAtual == 2)
+        {
+            FoxAnimator.Play("Armature|StrongSlash2", 0, 0);
+        }
+        else
+        {
+            FoxAnimator.Play("Armature|StrongSlash3", 0, 0);
+        }
+
+        EspadadaTimer = 0;
+        ComboEspadadaForteSolicitada = false;
+        ColisorInstanciado = false;
+    }
+
+    void FinalizarEspadadaForteAtual()
+    {
+        FoxAnimator.SetBool("EspadadaF" + EspadadaForteAtual, false);
+        FoxAnimator.Play("Armature|Parado", 0, 0);
+        EspadadaTimer = -1;
+        EspadadaForteAtual = 0;
+        ComboEspadadaForteSolicitada = false;
+        ColisorInstanciado = false;
     }
 
     void InstanciarColisorDeDano(float Dano = 40, float Offset = 0, float Scale = 1)
@@ -257,38 +368,7 @@ public class Jogador : MonoBehaviour
             EspadadaTimer += Time.deltaTime; 
 
             //O timing é diferente de acordo com o tipo de espadada!!!!!
-            switch (TipoEspadada)
-            {
-                case "Fraca":
-                    if (EspadadaTimer >= 0.2f)
-                    {
-                        EspadadaTimer = -1;
-                        FoxAnimator.SetBool("Espadada1", false);
-                        FoxAnimator.SetBool("Espadada2", false);
-                        ColisorInstanciado = false;
-                    }
-                    break;
-
-                case "Forte":
-                    if (EspadadaTimer > 0.55f)
-                    {
-                        if (!ColisorInstanciado) 
-                        {
-                            ColisorInstanciado = true;
-                            RotacaoColisor = 180;
-                            InstanciarColisorDeDano(DanoEspadadaForte, 2, 1.4f);
-                            AudioSourceJogador.PlayOneShot(EspadadaFraca);
-                            AudioSourceJogador.PlayOneShot(FoxAtaquesFracos[Random.Range(0, 2)]);
-                        }                      
-                    }
-                    if (EspadadaTimer >= 0.95f)
-                    {
-                        EspadadaTimer = -1;
-                        FoxAnimator.SetBool("EspadadaF1", false);
-                        ColisorInstanciado = false;
-                    }
-                    break;
-            }
+            LogicaEspadada();
         }
 
         if (!DetectorDeColisoes.NoChao) //Se estiver no ar...
@@ -330,7 +410,12 @@ public class Jogador : MonoBehaviour
         Vida -= Dano;
         FoxAnimator.Play("Dano");
         FoxAnimator.SetBool("EspadadaF1", false);
+        FoxAnimator.SetBool("EspadadaF2", false);
+        FoxAnimator.SetBool("EspadadaF3", false);
         EspadadaTimer = -1;
+        EspadadaForteAtual = 0;
+        ComboEspadadaForteSolicitada = false;
+        ColisorInstanciado = false;
 
         if (TimerGemido == -1)
         {
