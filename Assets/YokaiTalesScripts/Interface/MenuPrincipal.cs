@@ -50,6 +50,8 @@ public class MenuPrincipal : MonoBehaviour
     public GameObject VideoPlayerCutsceneInicial;
     public GameObject RawImageCutsceneInicial;
     public GameObject[] ObjetosParaDesabilitarCutscene;
+    public TelaPreta TelaPretaScript;
+    public GameObject VideoPlayerTelaPreta;
 
     [Header("Audio")]
     public AudioSource UIAudioSource;
@@ -59,6 +61,12 @@ public class MenuPrincipal : MonoBehaviour
     public Slider EfeitosSlider;
     public Slider MusicaSlider;
 
+    [Header("FadeInNOut")]
+    public Image FadeInNOut;
+    public float FadeOut = -1;
+    public Color Visivel;
+    public Color Invisivel;
+
     void Start()
     {
         //CARREGAR CONFIGURAÇÕES SALVAS!!!!
@@ -66,9 +74,35 @@ public class MenuPrincipal : MonoBehaviour
         MusicaSlider.value = PlayerPrefs.GetFloat("VolumeMusica", 1.0f);
     }
 
+    void Update()
+    {       
+        if (FadeOut != -1) //JOGO COMEÇANDO!!!!!
+        {
+            FadeOut += Time.unscaledDeltaTime;
+            FadeInNOut.color = Color.Lerp(Invisivel, Visivel, FadeOut);
+
+            if (FadeOut > 1)
+            {
+                //VideoPlayerCutsceneInicial.SetActive(true);
+                //RawImageCutsceneInicial.SetActive(true);
+                UIAudioSource.enabled = false;
+                MusicAudioSource.enabled = false;
+
+                foreach (GameObject Elemento in ObjetosParaDesabilitarCutscene)
+                {
+                    Elemento.SetActive(false);
+                }
+
+                TelaPretaScript.gameObject.SetActive(true);
+                VideoPlayerTelaPreta.SetActive(true);
+                this.enabled = false;
+            }
+        }
+    }
+
     public void dUpInput(InputAction.CallbackContext context)
     {
-        if (CutsceneAtiva) return;
+        if (FadeOut != -1) return;
 
         if (context.performed)
         {
@@ -94,7 +128,7 @@ public class MenuPrincipal : MonoBehaviour
 
     public void dDownInput(InputAction.CallbackContext context)
     {
-        if (CutsceneAtiva) return;
+        if (FadeOut != -1) return;
 
         if (context.performed)
         {
@@ -120,7 +154,7 @@ public class MenuPrincipal : MonoBehaviour
 
     public void dLeftInput(InputAction.CallbackContext context)
     {
-        if (CutsceneAtiva) return;
+        if (FadeOut != -1) return;
 
         if (context.performed)
         {
@@ -144,7 +178,7 @@ public class MenuPrincipal : MonoBehaviour
 
     public void dRightInput(InputAction.CallbackContext context)
     {
-        if (CutsceneAtiva) return;
+        if (FadeOut != -1) return;
 
         if (context.performed)
         {
@@ -168,19 +202,9 @@ public class MenuPrincipal : MonoBehaviour
 
     public void JumpInput(InputAction.CallbackContext context) //SELECIONAR
     {
-        if (!CutsceneAtiva)
+        if (context.performed)
         {
-            if (context.performed)
-            {
-                ConfirmarOpcao();
-            }
-        }
-        else
-        {
-            if (context.performed)
-            {
-                SceneManager.LoadScene(1);
-            }
+            ConfirmarOpcao();
         }
     }
 
@@ -257,8 +281,9 @@ public class MenuPrincipal : MonoBehaviour
                 switch (MenuSelecaoPrincipal)
                 {
                     case 0: //NOVO JOGO
+                        FadeOut = 0;
                         //SceneManager.LoadScene(1);
-                        VideoPlayerCutsceneInicial.SetActive(true);
+                        /*VideoPlayerCutsceneInicial.SetActive(true);
                         RawImageCutsceneInicial.SetActive(true);
                         CutsceneAtiva = true;
                         UIAudioSource.enabled = false;
@@ -267,7 +292,7 @@ public class MenuPrincipal : MonoBehaviour
                         foreach (GameObject Elemento in ObjetosParaDesabilitarCutscene)
                         {
                             Elemento.SetActive(false);
-                        }
+                        }*/
                         
                         break;
 

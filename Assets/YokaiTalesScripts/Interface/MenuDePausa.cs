@@ -238,6 +238,7 @@ public class MenuDePausa : MonoBehaviour
                         ScriptDoJogador.enabled = true;
                         this.gameObject.SetActive(false);
                         GG.PAUSADO = false;
+                        foreach (GameObject ElementoHUD in GG.HUD) { ElementoHUD.SetActive(true); }
                         break;
 
                     case 1: //OPÇÕES
@@ -249,7 +250,7 @@ public class MenuDePausa : MonoBehaviour
                         break;
 
                     case 2: //SALVAR E SAIR
-                        Application.Quit();
+                        SceneManager.LoadScene("Menu Principal");
                         break;
                 }
                 break;

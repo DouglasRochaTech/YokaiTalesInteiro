@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 81b3f9742abc73a498ea96ddecd35814
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288878
+  packageName: Shrine Pack (Torii, StoneLantern, PaperLantern)
+  packageVersion: 1.02
+  assetPath: Assets/Shrine Pack/Prefabs/StoneLantern.prefab
+  uploadId: 694967

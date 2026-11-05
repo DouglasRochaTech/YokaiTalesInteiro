@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 14f732f9f0a9e3d408764155dadf8518
+timeCreated: 1496229890
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86967
+  packageName: Dry Trees
+  packageVersion: 2.0
+  assetPath: Assets/Dry_Trees/Materials/Bark.mat
+  uploadId: 559944
