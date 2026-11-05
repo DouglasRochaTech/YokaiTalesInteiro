@@ -43,6 +43,7 @@ public class Jogador : MonoBehaviour
     GameObject ColisorDeDanoInstanciado;
     public Animator FoxAnimator;
     public ParticleSystem SistemaDeParticulas;
+    public TrailRenderer TrailEspada;
 
     [Header("Audio")]
     public AudioSource AudioSourceJogador;
@@ -163,6 +164,7 @@ public class Jogador : MonoBehaviour
                             TipoEspadada = "Forte";
                             EspadadaForteAtual = 1;
                             ComboEspadadaForteSolicitada = false;
+                            TrailEspada.enabled = true;
 
                             EspadadaTimer = 0;
                         }
@@ -204,7 +206,7 @@ public class Jogador : MonoBehaviour
                         if (EspadadaTimer > 0.55f && !ColisorInstanciado)
                         {
                             RotacaoColisor = 180;
-                            InstanciarColisorEspadadaForteAtual(0, 2, 1.4f);
+                            InstanciarColisorEspadadaForteAtual(DanoEspadadaForte[0], 2, 1.4f);
                         }
                         if (EspadadaTimer >= 0.95f)
                         {
@@ -216,7 +218,7 @@ public class Jogador : MonoBehaviour
                         if (EspadadaTimer > 0.55f && !ColisorInstanciado)
                         {
                             RotacaoColisor = 0;
-                            InstanciarColisorEspadadaForteAtual(1, 1, 1.8f);
+                            InstanciarColisorEspadadaForteAtual(DanoEspadadaForte[1], 1, 1.8f);
                         }
                         if (EspadadaTimer >= 0.95f)
                         {
@@ -228,11 +230,14 @@ public class Jogador : MonoBehaviour
                         if (EspadadaTimer > 0.55f && !ColisorInstanciado)
                         {
                             RotacaoColisor = 180;
-                            InstanciarColisorEspadadaForteAtual(2, 0.5f, 2.0f);
+                            InstanciarColisorEspadadaForteAtual(DanoEspadadaForte[2], 0.5f, 2.0f);
+                            VelocidadeVertical = Mathf.Sqrt(AlturaPulo * -3f * Gravidade);
                         }
                         if (EspadadaTimer >= 0.95f)
                         {
                             FinalizarEspadadaForteAtual();
+                            FoxAnimator.SetBool("Pulando", true);
+                            FoxAnimator.Play("Pular", 0, 0.5f);
                         }
                         break;
                 }
@@ -277,6 +282,7 @@ public class Jogador : MonoBehaviour
     {
         FoxAnimator.SetBool("EspadadaF" + EspadadaForteAtual, false);
         FoxAnimator.Play("Armature|Parado", 0, 0);
+        TrailEspada.enabled = false;
         EspadadaTimer = -1;
         EspadadaForteAtual = 0;
         ComboEspadadaForteSolicitada = false;
@@ -286,7 +292,7 @@ public class Jogador : MonoBehaviour
     void InstanciarColisorDeDano(float Dano = 40, float Offset = 0, float Scale = 1)
     {
         ColisorDeDanoInstanciado = Instantiate(ColisorDeDano, transform.position, transform.rotation);
-        Destroy(ColisorDeDanoInstanciado, 0.16f);
+        Destroy(ColisorDeDanoInstanciado, 0.16f); 
         //ColisorDeDanoInstanciado.transform.Translate(transform.forward * Offset);
 
         Vector3 posicaoDesejada = transform.position + (transform.forward * Offset);
@@ -416,6 +422,7 @@ public class Jogador : MonoBehaviour
         EspadadaForteAtual = 0;
         ComboEspadadaForteSolicitada = false;
         ColisorInstanciado = false;
+        TrailEspada.enabled = false;
 
         if (TimerGemido == -1)
         {
